@@ -76,7 +76,7 @@ class KNearestNeighbor:
                 #####################################################################
                 # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
                 diff = X[i,] - self.X_train[j,]
-                dists[i,j] = np.linalg.norm(diff)
+                dists[i,j] = diff.dot(diff.T)
                 # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
 
@@ -99,7 +99,7 @@ class KNearestNeighbor:
             #######################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
             diff = self.X_train - X[i,]
-            dists[i,] = np.linalg.norm(diff, axis=1)
+            dists[i,] = np.sum(np.square(diff), axis=1)
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
 
@@ -129,7 +129,7 @@ class KNearestNeighbor:
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         sx = np.sum(np.square(X), axis=1).reshape(num_test,1)
         st = np.sum(np.square(self.X_train), axis=1).reshape(1, num_train)
-        dists = np.sqrt(-2 * X.dot(self.X_train.T) + sx + st)
+        dists = -2 * X.dot(self.X_train.T) + sx + st
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
 

@@ -51,16 +51,16 @@ class KNearestNeighbor:
 
     def compute_distances_two_loops(self, X):
         """
-        Compute the distance between each test point in X and each training point
+        Compute the square of distance between each test point in X and each training point
         in self.X_train using a nested loop over both the training data and the
-        test data.
+        test data. Square used to eliminate unnecessary computations.
 
         Inputs:
         - X: A numpy array of shape (num_test, D) containing test data.
 
         Returns:
         - dists: A numpy array of shape (num_test, num_train) where dists[i, j]
-          is the Euclidean distance between the ith test point and the jth training
+          is the square of Euclidean distance between the ith test point and the jth training
           point.
         """
         num_test = X.shape[0]
@@ -82,8 +82,9 @@ class KNearestNeighbor:
 
     def compute_distances_one_loop(self, X):
         """
-        Compute the distance between each test point in X and each training point
-        in self.X_train using a single loop over the test data.
+        Compute the square of distance between each test point in X and each training point
+        in self.X_train using a single loop over the test data. Square used to eliminate 
+        unnecessary computations.
 
         Input / Output: Same as compute_distances_two_loops
         """
@@ -105,8 +106,9 @@ class KNearestNeighbor:
 
     def compute_distances_no_loops(self, X):
         """
-        Compute the distance between each test point in X and each training point
-        in self.X_train using no explicit loops.
+        Compute the square of distance between each test point in X and each training point
+        in self.X_train using no explicit loops. Square used to eliminate 
+        unnecessary computations.
 
         Input / Output: Same as compute_distances_two_loops
         """
